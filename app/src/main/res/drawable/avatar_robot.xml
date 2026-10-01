@@ -1,0 +1,36 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="96dp"
+    android:height="96dp"
+    android:viewportWidth="96"
+    android:viewportHeight="96">
+    <!-- Circle Background -->
+    <path
+        android:fillColor="#CCFBF1"
+        android:pathData="M48,4A44,44 0 1,0 48,92A44,44 0 1,0 48,4Z"/>
+    <!-- Antenna -->
+    <path
+        android:fillColor="#0D9488"
+        android:pathData="M46,14L50,14L50,26L46,26Z"/>
+    <path
+        android:fillColor="#F43F5E"
+        android:pathData="M48,14A4,4 0 1,0 48,6A4,4 0 1,0 48,14Z"/>
+    <!-- Head -->
+    <path
+        android:fillColor="#14B8A6"
+        android:pathData="M24,26L72,26A6,6 0 0,1 78,32L78,68A6,6 0 0,1 72,74L24,74A6,6 0 0,1 18,68L18,32A6,6 0 0,1 24,26Z"/>
+    <!-- Screen Face -->
+    <path
+        android:fillColor="#042F2E"
+        android:pathData="M28,34L68,34A4,4 0 0,1 72,38L72,56A4,4 0 0,1 68,60L28,60A4,4 0 0,1 24,56L24,38A4,4 0 0,1 28,34Z"/>
+    <!-- Eyes -->
+    <path
+        android:fillColor="#2DD4BF"
+        android:pathData="M36,48A4,4 0 1,0 36,40A4,4 0 1,0 36,48Z"/>
+    <path
+        android:fillColor="#2DD4BF"
+        android:pathData="M60,48A4,4 0 1,0 60,40A4,4 0 1,0 60,48Z"/>
+    <!-- Mouth Grid -->
+    <path
+        android:fillColor="#F0FDFA"
+        android:pathData="M34,64L62,64L62,68L34,68Z"/>
+</vector>

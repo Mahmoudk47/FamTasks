@@ -1,0 +1,33 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="96dp"
+    android:height="96dp"
+    android:viewportWidth="96"
+    android:viewportHeight="96">
+    <!-- Circle Background -->
+    <path
+        android:fillColor="#FCE7F3"
+        android:pathData="M48,4A44,44 0 1,0 48,92A44,44 0 1,0 48,4Z"/>
+    <!-- Cape / Hair -->
+    <path
+        android:fillColor="#1E293B"
+        android:pathData="M48,18C30,18 24,28 24,40L72,40C72,28 66,18 48,18Z"/>
+    <!-- Face -->
+    <path
+        android:fillColor="#FED7AA"
+        android:pathData="M48,30C34,30 26,40 26,56C26,72 36,80 48,80C60,80 70,72 70,56C70,40 62,30 48,30Z"/>
+    <!-- Hero Mask -->
+    <path
+        android:fillColor="#E11D48"
+        android:pathData="M24,44L48,48L72,44L68,58L48,54L28,58Z"/>
+    <!-- Eyes cutout in mask -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M34,51A4,3 0 1,0 34,45A4,3 0 1,0 34,51Z"/>
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M62,51A4,3 0 1,0 62,45A4,3 0 1,0 62,51Z"/>
+    <!-- Smile -->
+    <path
+        android:fillColor="#9A3412"
+        android:pathData="M42,66C44,70 52,70 54,66Z"/>
+</vector>

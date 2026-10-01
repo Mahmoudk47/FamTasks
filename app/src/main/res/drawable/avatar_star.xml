@@ -1,0 +1,32 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="96dp"
+    android:height="96dp"
+    android:viewportWidth="96"
+    android:viewportHeight="96">
+    <!-- Circle Background -->
+    <path
+        android:fillColor="#FEF9C3"
+        android:pathData="M48,4A44,44 0 1,0 48,92A44,44 0 1,0 48,4Z"/>
+    <!-- Glowing Star -->
+    <path
+        android:fillColor="#FACC15"
+        android:pathData="M48,16L56,36L78,36L60,50L68,72L48,58L28,72L36,50L18,36L40,36Z"/>
+    <!-- Star Face Eyes -->
+    <path
+        android:fillColor="#713F12"
+        android:pathData="M42,44A3,3 0 1,0 42,38A3,3 0 1,0 42,44Z"/>
+    <path
+        android:fillColor="#713F12"
+        android:pathData="M54,44A3,3 0 1,0 54,38A3,3 0 1,0 54,44Z"/>
+    <!-- Cheeks -->
+    <path
+        android:fillColor="#F472B6"
+        android:pathData="M38,48A3,2 0 1,0 38,44A3,2 0 1,0 38,48Z"/>
+    <path
+        android:fillColor="#F472B6"
+        android:pathData="M58,48A3,2 0 1,0 58,44A3,2 0 1,0 58,48Z"/>
+    <!-- Smile -->
+    <path
+        android:fillColor="#713F12"
+        android:pathData="M44,48C45,52 51,52 52,48Z"/>
+</vector>

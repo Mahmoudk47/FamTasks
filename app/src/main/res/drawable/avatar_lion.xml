@@ -1,0 +1,36 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="96dp"
+    android:height="96dp"
+    android:viewportWidth="96"
+    android:viewportHeight="96">
+    <!-- Circle Background -->
+    <path
+        android:fillColor="#FEF08A"
+        android:pathData="M48,4A44,44 0 1,0 48,92A44,44 0 1,0 48,4Z"/>
+    <!-- Mane -->
+    <path
+        android:fillColor="#EA580C"
+        android:pathData="M48,16C28,16 16,28 16,48C16,68 28,80 48,80C68,80 80,68 80,48C80,28 68,16 48,16Z"/>
+    <!-- Head -->
+    <path
+        android:fillColor="#FBBF24"
+        android:pathData="M48,26C34,26 26,34 26,48C26,62 34,70 48,70C62,70 70,62 70,48C70,34 62,26 48,26Z"/>
+    <!-- Ears -->
+    <path
+        android:fillColor="#F59E0B"
+        android:pathData="M30,28A5,5 0 1,0 30,18A5,5 0 1,0 30,28Z"/>
+    <path
+        android:fillColor="#F59E0B"
+        android:pathData="M66,28A5,5 0 1,0 66,18A5,5 0 1,0 66,28Z"/>
+    <!-- Eyes -->
+    <path
+        android:fillColor="#78350F"
+        android:pathData="M38,44A3,3 0 1,0 38,38A3,3 0 1,0 38,44Z"/>
+    <path
+        android:fillColor="#78350F"
+        android:pathData="M58,44A3,3 0 1,0 58,38A3,3 0 1,0 58,44Z"/>
+    <!-- Nose -->
+    <path
+        android:fillColor="#B45309"
+        android:pathData="M48,54L43,48L53,48Z"/>
+</vector>

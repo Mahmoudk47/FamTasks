@@ -1,0 +1,170 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile with role, family affiliation, points balance, and preferences.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "Unique user ID" },
+        "email": { "type": "string", "format": "email", "description": "User email address" },
+        "displayName": { "type": "string", "description": "Display name of user" },
+        "role": { "type": "string", "enum": ["super_admin", "family_admin", "family_member"], "description": "User role" },
+        "familyId": { "type": "string", "description": "ID of the family they belong to" },
+        "pointsBalance": { "type": "integer", "description": "Current points balance" },
+        "totalPointsEarned": { "type": "integer", "description": "Lifetime points earned" },
+        "totalPointsSpent": { "type": "integer", "description": "Lifetime points spent" },
+        "notifyNewTasks": { "type": "boolean", "description": "Notification preference for new tasks" },
+        "notifyTaskChanges": { "type": "boolean", "description": "Notification preference for task changes" },
+        "notifyStoreItems": { "type": "boolean", "description": "Notification preference for new store items" },
+        "notifyPurchases": { "type": "boolean", "description": "Notification preference for purchases" },
+        "notifyApprovals": { "type": "boolean", "description": "Notification preference for approvals" },
+        "preferredLanguage": { "type": "string", "enum": ["en", "ar"], "description": "Preferred language" },
+        "themeMode": { "type": "string", "enum": ["system", "light", "dark"], "description": "Theme mode" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Server timestamp of creation" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Server timestamp of last update" }
+      },
+      "required": ["userId", "email", "displayName", "role", "pointsBalance", "createdAt", "updatedAt"]
+    },
+    "Family": {
+      "title": "Family",
+      "description": "Family group with unique join code, admin user ID, and member list.",
+      "type": "object",
+      "properties": {
+        "familyId": { "type": "string", "description": "Unique family ID" },
+        "name": { "type": "string", "description": "Family name" },
+        "joinCode": { "type": "string", "description": "Unique code used by members to join" },
+        "adminUserId": { "type": "string", "description": "User ID of current Family Admin" },
+        "adminName": { "type": "string", "description": "Name of current Family Admin" },
+        "memberUids": { "type": "array", "description": "List of user IDs in this family" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Server timestamp of creation" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Server timestamp of last update" }
+      },
+      "required": ["familyId", "name", "joinCode", "adminUserId", "createdAt", "updatedAt"]
+    },
+    "JoinRequest": {
+      "title": "JoinRequest",
+      "description": "Request submitted by a member to join a family.",
+      "type": "object",
+      "properties": {
+        "requestId": { "type": "string", "description": "Unique request ID" },
+        "familyId": { "type": "string", "description": "Target family ID" },
+        "userId": { "type": "string", "description": "User ID of requesting member" },
+        "userName": { "type": "string", "description": "Display name of requesting member" },
+        "userEmail": { "type": "string", "description": "Email of requesting member" },
+        "status": { "type": "string", "enum": ["pending", "approved", "rejected"], "description": "Request status" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Creation timestamp" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Update timestamp" }
+      },
+      "required": ["requestId", "familyId", "userId", "userName", "status", "createdAt", "updatedAt"]
+    },
+    "Task": {
+      "title": "Task",
+      "description": "Task with point value, scheduling, assigned user, and status.",
+      "type": "object",
+      "properties": {
+        "taskId": { "type": "string", "description": "Unique task ID" },
+        "familyId": { "type": "string", "description": "Family ID the task belongs to" },
+        "title": { "type": "string", "description": "Task title" },
+        "description": { "type": "string", "description": "Task description" },
+        "points": { "type": "integer", "description": "Points value awarded upon completion" },
+        "assignedToUserId": { "type": "string", "description": "User ID of assignee" },
+        "assignedToUserName": { "type": "string", "description": "Name of assignee" },
+        "createdByUserId": { "type": "string", "description": "User ID of creator" },
+        "createdByName": { "type": "string", "description": "Name of creator" },
+        "status": { "type": "string", "enum": ["pending_approval", "active", "completed_pending_review", "completed", "rejected"], "description": "Status" },
+        "scheduleType": { "type": "string", "enum": ["one_time", "scheduled", "daily", "weekly", "custom"], "description": "Scheduling type" },
+        "scheduleDetails": { "type": "string", "description": "Schedule details text" },
+        "isRecurring": { "type": "boolean", "description": "Whether the task repeats" },
+        "recurringInterval": { "type": "string", "description": "Interval for repetition" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Creation timestamp" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Update timestamp" }
+      },
+      "required": ["taskId", "familyId", "title", "points", "assignedToUserId", "createdByUserId", "status", "createdAt", "updatedAt"]
+    },
+    "StoreItem": {
+      "title": "StoreItem",
+      "description": "Store reward item with point price and availability assignment.",
+      "type": "object",
+      "properties": {
+        "itemId": { "type": "string", "description": "Unique item ID" },
+        "familyId": { "type": "string", "description": "Family ID" },
+        "name": { "type": "string", "description": "Reward item name" },
+        "description": { "type": "string", "description": "Details about the item" },
+        "pointPrice": { "type": "integer", "description": "Points cost" },
+        "targetType": { "type": "string", "enum": ["whole_family", "specific_person"], "description": "Availability scope" },
+        "targetUserId": { "type": "string", "description": "Assigned user ID if specific person" },
+        "targetUserName": { "type": "string", "description": "Assigned user name if specific person" },
+        "createdByUserId": { "type": "string", "description": "Creator user ID" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Creation timestamp" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Update timestamp" }
+      },
+      "required": ["itemId", "familyId", "name", "pointPrice", "targetType", "createdByUserId", "createdAt", "updatedAt"]
+    },
+    "Purchase": {
+      "title": "Purchase",
+      "description": "Store purchase request requiring admin approval.",
+      "type": "object",
+      "properties": {
+        "purchaseId": { "type": "string", "description": "Unique purchase ID" },
+        "familyId": { "type": "string", "description": "Family ID" },
+        "itemId": { "type": "string", "description": "Store item ID" },
+        "itemName": { "type": "string", "description": "Name of purchased item" },
+        "pointPrice": { "type": "integer", "description": "Cost in points" },
+        "userId": { "type": "string", "description": "Purchaser user ID" },
+        "userName": { "type": "string", "description": "Purchaser name" },
+        "status": { "type": "string", "enum": ["pending", "approved", "rejected"], "description": "Purchase approval status" },
+        "adminNote": { "type": "string", "description": "Optional admin note" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Creation timestamp" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Update timestamp" }
+      },
+      "required": ["purchaseId", "familyId", "itemId", "itemName", "pointPrice", "userId", "userName", "status", "createdAt", "updatedAt"]
+    },
+    "Notification": {
+      "title": "Notification",
+      "description": "User notification regarding tasks, store, approvals, and family updates.",
+      "type": "object",
+      "properties": {
+        "notificationId": { "type": "string", "description": "Unique notification ID" },
+        "familyId": { "type": "string", "description": "Family ID" },
+        "recipientUserId": { "type": "string", "description": "Recipient user ID" },
+        "title": { "type": "string", "description": "Notification headline" },
+        "message": { "type": "string", "description": "Detailed explanation of event" },
+        "type": { "type": "string", "description": "Notification category" },
+        "targetEntityId": { "type": "string", "description": "Optional associated task or purchase ID" },
+        "isRead": { "type": "boolean", "description": "Read status" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Creation timestamp" }
+      },
+      "required": ["notificationId", "familyId", "recipientUserId", "title", "message", "type", "isRead", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "User profile documents"
+    },
+    "/families/{familyId}": {
+      "schema": { "$ref": "#/entities/Family" },
+      "description": "Family group records"
+    },
+    "/join_requests/{requestId}": {
+      "schema": { "$ref": "#/entities/JoinRequest" },
+      "description": "Family join requests"
+    },
+    "/tasks/{taskId}": {
+      "schema": { "$ref": "#/entities/Task" },
+      "description": "Family task records"
+    },
+    "/store_items/{itemId}": {
+      "schema": { "$ref": "#/entities/StoreItem" },
+      "description": "Family reward store items"
+    },
+    "/purchases/{purchaseId}": {
+      "schema": { "$ref": "#/entities/Purchase" },
+      "description": "Reward store purchase requests"
+    },
+    "/notifications/{notificationId}": {
+      "schema": { "$ref": "#/entities/Notification" },
+      "description": "User notifications"
+    }
+  }
+}

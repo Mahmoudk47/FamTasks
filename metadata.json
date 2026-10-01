@@ -1,0 +1,6 @@
+{
+  "name": "FamTasks",
+  "description": "Modern family task management and rewards app with roles, approvals, points, store, and leaderboard.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

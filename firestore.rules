@@ -1,0 +1,183 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isSuperAdmin() {
+      return (request.auth != null && (
+        (request.auth.token.email == "admin@admin.com" && request.auth.token.email_verified == true) ||
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid))
+      ));
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function isValidUser(data) {
+      return data.userId is string && data.userId.size() > 0 && data.userId.size() <= 128 &&
+             data.email is string && data.email.size() > 0 && data.email.size() <= 200 &&
+             (!('firstName' in data) || data.firstName is string) &&
+             (!('secondName' in data) || data.secondName is string) &&
+             (!('password' in data) || data.password is string) &&
+             (!('avatarTemplate' in data) || data.avatarTemplate is string) &&
+             (!('avatarUri' in data) || data.avatarUri is string) &&
+             data.displayName is string && data.displayName.size() > 0 && data.displayName.size() <= 100 &&
+             data.role in ['super_admin', 'family_admin', 'family_member'] &&
+             data.pointsBalance is int &&
+             (!('familyId' in data) || data.familyId is string) &&
+             (!('totalPointsEarned' in data) || data.totalPointsEarned is int) &&
+             (!('totalPointsSpent' in data) || data.totalPointsSpent is int) &&
+             (!('notifyNewTasks' in data) || data.notifyNewTasks is bool) &&
+             (!('notifyTaskChanges' in data) || data.notifyTaskChanges is bool) &&
+             (!('notifyStoreItems' in data) || data.notifyStoreItems is bool) &&
+             (!('notifyPurchases' in data) || data.notifyPurchases is bool) &&
+             (!('notifyApprovals' in data) || data.notifyApprovals is bool) &&
+             (!('preferredLanguage' in data) || data.preferredLanguage in ['en', 'ar']) &&
+             (!('themeMode' in data) || data.themeMode in ['system', 'light', 'dark']) &&
+             data.createdAt is timestamp && data.createdAt <= request.time &&
+             data.updatedAt is timestamp && data.updatedAt <= request.time;
+    }
+
+    function isValidFamily(data) {
+      return data.familyId is string && data.familyId.size() > 0 && data.familyId.size() <= 128 &&
+             data.name is string && data.name.size() > 0 && data.name.size() <= 100 &&
+             data.joinCode is string && data.joinCode.size() >= 4 && data.joinCode.size() <= 20 &&
+             data.adminUserId is string && data.adminUserId.size() > 0 && data.adminUserId.size() <= 128 &&
+             (!('adminName' in data) || (data.adminName is string && data.adminName.size() <= 100)) &&
+             (!('memberUids' in data) || (data.memberUids is list && data.memberUids.size() <= 100)) &&
+             data.createdAt is timestamp && data.createdAt <= request.time &&
+             data.updatedAt is timestamp && data.updatedAt <= request.time;
+    }
+
+    function isValidTask(data) {
+      return data.taskId is string && data.taskId.size() > 0 && data.taskId.size() <= 128 &&
+             data.familyId is string && data.familyId.size() > 0 && data.familyId.size() <= 128 &&
+             data.title is string && data.title.size() > 0 && data.title.size() <= 200 &&
+             (!('description' in data) || (data.description is string && data.description.size() <= 2000)) &&
+             data.points is int && data.points >= 0 &&
+             data.assignedToUserId is string && data.assignedToUserId.size() <= 128 &&
+             data.createdByUserId is string && data.createdByUserId.size() <= 128 &&
+             data.status in ['pending_approval', 'active', 'completed_pending_review', 'completed', 'rejected'] &&
+             (!('scheduleType' in data) || data.scheduleType in ['one_time', 'scheduled', 'daily', 'weekly', 'custom']) &&
+             (!('scheduleDetails' in data) || (data.scheduleDetails is string && data.scheduleDetails.size() <= 500)) &&
+             (!('isRecurring' in data) || data.isRecurring is bool) &&
+             (!('recurringInterval' in data) || (data.recurringInterval is string && data.recurringInterval.size() <= 50)) &&
+             data.createdAt is timestamp && data.createdAt <= request.time &&
+             data.updatedAt is timestamp && data.updatedAt <= request.time;
+    }
+
+    function isValidStoreItem(data) {
+      return data.itemId is string && data.itemId.size() > 0 && data.itemId.size() <= 128 &&
+             data.familyId is string && data.familyId.size() > 0 && data.familyId.size() <= 128 &&
+             data.name is string && data.name.size() > 0 && data.name.size() <= 200 &&
+             (!('description' in data) || (data.description is string && data.description.size() <= 2000)) &&
+             data.pointPrice is int && data.pointPrice >= 0 &&
+             (!('quantity' in data) || (data.quantity is int && data.quantity >= 0)) &&
+             (!('images' in data) || (data.images is list && data.images.size() <= 20)) &&
+             (!('imageUrl' in data) || (data.imageUrl is string && data.imageUrl.size() <= 2000)) &&
+             data.targetType in ['whole_family', 'specific_person'] &&
+             (!('targetUserId' in data) || (data.targetUserId is string && data.targetUserId.size() <= 128)) &&
+             (!('targetUserName' in data) || (data.targetUserName is string && data.targetUserName.size() <= 100)) &&
+             data.createdByUserId is string && data.createdByUserId.size() <= 128 &&
+             data.createdAt is timestamp && data.createdAt <= request.time &&
+             data.updatedAt is timestamp && data.updatedAt <= request.time;
+    }
+
+    function isValidPurchase(data) {
+      return data.purchaseId is string && data.purchaseId.size() > 0 && data.purchaseId.size() <= 128 &&
+             data.familyId is string && data.familyId.size() > 0 && data.familyId.size() <= 128 &&
+             data.itemId is string && data.itemId.size() > 0 && data.itemId.size() <= 128 &&
+             data.itemName is string && data.itemName.size() > 0 && data.itemName.size() <= 200 &&
+             data.pointPrice is int && data.pointPrice >= 0 &&
+             (!('quantity' in data) || (data.quantity is int && data.quantity >= 0)) &&
+             (!('pricePerItem' in data) || (data.pricePerItem is int && data.pricePerItem >= 0)) &&
+             (!('totalPoints' in data) || (data.totalPoints is int && data.totalPoints >= 0)) &&
+             data.userId is string && data.userId.size() > 0 && data.userId.size() <= 128 &&
+             data.userName is string && data.userName.size() > 0 && data.userName.size() <= 100 &&
+             data.status in ['pending', 'approved', 'rejected', 'cancelled'] &&
+             (!('adminNote' in data) || (data.adminNote is string && data.adminNote.size() <= 1000)) &&
+             data.createdAt is timestamp && data.createdAt <= request.time &&
+             data.updatedAt is timestamp && data.updatedAt <= request.time;
+    }
+
+    function isValidNotification(data) {
+      return data.notificationId is string && data.notificationId.size() > 0 && data.notificationId.size() <= 128 &&
+             data.familyId is string && data.familyId.size() <= 128 &&
+             data.recipientUserId is string && data.recipientUserId.size() > 0 && data.recipientUserId.size() <= 128 &&
+             data.title is string && data.title.size() > 0 && data.title.size() <= 200 &&
+             data.message is string && data.message.size() > 0 && data.message.size() <= 2000 &&
+             data.type is string && data.type.size() > 0 && data.type.size() <= 100 &&
+             (!('targetEntityId' in data) || (data.targetEntityId is string && data.targetEntityId.size() <= 128)) &&
+             data.isRead is bool &&
+             data.createdAt is timestamp && data.createdAt <= request.time;
+    }
+
+    function isValidJoinRequest(data) {
+      return data.requestId is string && data.requestId.size() > 0 && data.requestId.size() <= 128 &&
+             data.familyId is string && data.familyId.size() > 0 && data.familyId.size() <= 128 &&
+             data.userId is string && data.userId.size() > 0 && data.userId.size() <= 128 &&
+             data.userName is string && data.userName.size() > 0 && data.userName.size() <= 100 &&
+             data.status in ['pending', 'approved', 'rejected'] &&
+             data.createdAt is timestamp && data.createdAt <= request.time &&
+             data.updatedAt is timestamp && data.updatedAt <= request.time;
+    }
+
+    match /admins/{adminId} {
+      allow read: if true;
+      allow write: if isSuperAdmin();
+    }
+
+    match /users/{userId} {
+      allow read: if true;
+      allow create: if isValidId(userId) && isValidUser(request.resource.data);
+      allow update: if isValidId(userId) && isValidUser(request.resource.data);
+      allow delete: if isValidId(userId);
+    }
+
+    match /families/{familyId} {
+      allow read: if true;
+      allow create: if isValidId(familyId) && isValidFamily(request.resource.data);
+      allow update: if isValidId(familyId) && isValidFamily(request.resource.data);
+      allow delete: if isValidId(familyId);
+    }
+
+    match /join_requests/{requestId} {
+      allow read: if true;
+      allow create: if isValidId(requestId) && isValidJoinRequest(request.resource.data);
+      allow update: if isValidId(requestId) && isValidJoinRequest(request.resource.data);
+      allow delete: if isValidId(requestId);
+    }
+
+    match /tasks/{taskId} {
+      allow read: if true;
+      allow create: if isValidId(taskId) && isValidTask(request.resource.data);
+      allow update: if isValidId(taskId) && isValidTask(request.resource.data);
+      allow delete: if isValidId(taskId);
+    }
+
+    match /store_items/{itemId} {
+      allow read: if true;
+      allow create: if isValidId(itemId) && isValidStoreItem(request.resource.data);
+      allow update: if isValidId(itemId) && isValidStoreItem(request.resource.data);
+      allow delete: if isValidId(itemId);
+    }
+
+    match /purchases/{purchaseId} {
+      allow read: if true;
+      allow create: if isValidId(purchaseId) && isValidPurchase(request.resource.data);
+      allow update: if isValidId(purchaseId) && isValidPurchase(request.resource.data);
+      allow delete: if isValidId(purchaseId);
+    }
+
+    match /notifications/{notificationId} {
+      allow read: if true;
+      allow create: if isValidId(notificationId) && isValidNotification(request.resource.data);
+      allow update: if isValidId(notificationId) && isValidNotification(request.resource.data);
+      allow delete: if isValidId(notificationId);
+    }
+  }
+}

@@ -1,0 +1,39 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="96dp"
+    android:height="96dp"
+    android:viewportWidth="96"
+    android:viewportHeight="96">
+    <!-- Circle Background -->
+    <path
+        android:fillColor="#E2E8F0"
+        android:pathData="M48,4A44,44 0 1,0 48,92A44,44 0 1,0 48,4Z"/>
+    <!-- Panda Ears -->
+    <path
+        android:fillColor="#1E293B"
+        android:pathData="M22,26A9,9 0 1,0 22,8A9,9 0 1,0 22,26Z"/>
+    <path
+        android:fillColor="#1E293B"
+        android:pathData="M74,26A9,9 0 1,0 74,8A9,9 0 1,0 74,26Z"/>
+    <!-- Panda Head -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M48,22C30,22 18,35 18,52C18,70 32,82 48,82C64,82 78,70 78,52C78,35 66,22 48,22Z"/>
+    <!-- Eye Patches -->
+    <path
+        android:fillColor="#1E293B"
+        android:pathData="M33,48C28,48 25,42 27,37C29,32 35,33 39,37C42,41 38,48 33,48Z"/>
+    <path
+        android:fillColor="#1E293B"
+        android:pathData="M63,48C68,48 71,42 69,37C67,32 61,33 57,37C54,41 58,48 63,48Z"/>
+    <!-- Eyes -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M33,42A2,2 0 1,0 33,38A2,2 0 1,0 33,42Z"/>
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M63,42A2,2 0 1,0 63,38A2,2 0 1,0 63,42Z"/>
+    <!-- Nose -->
+    <path
+        android:fillColor="#1E293B"
+        android:pathData="M48,60C44,60 42,56 48,53C54,56 52,60 48,60Z"/>
+</vector>

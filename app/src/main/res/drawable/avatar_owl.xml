@@ -1,0 +1,39 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="96dp"
+    android:height="96dp"
+    android:viewportWidth="96"
+    android:viewportHeight="96">
+    <!-- Circle Background -->
+    <path
+        android:fillColor="#E0E7FF"
+        android:pathData="M48,4A44,44 0 1,0 48,92A44,44 0 1,0 48,4Z"/>
+    <!-- Body -->
+    <path
+        android:fillColor="#4F46E5"
+        android:pathData="M48,20C32,20 22,32 22,54C22,72 34,82 48,82C62,82 74,72 74,54C74,32 64,20 48,20Z"/>
+    <!-- Tufts / Ears -->
+    <path
+        android:fillColor="#3730A3"
+        android:pathData="M24,24L36,36L22,36Z"/>
+    <path
+        android:fillColor="#3730A3"
+        android:pathData="M72,24L74,36L60,36Z"/>
+    <!-- Big Eyes White -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M36,48A10,10 0 1,0 36,28A10,10 0 1,0 36,48Z"/>
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M60,48A10,10 0 1,0 60,28A10,10 0 1,0 60,48Z"/>
+    <!-- Pupils -->
+    <path
+        android:fillColor="#1E293B"
+        android:pathData="M37,42A5,5 0 1,0 37,32A5,5 0 1,0 37,42Z"/>
+    <path
+        android:fillColor="#1E293B"
+        android:pathData="M59,42A5,5 0 1,0 59,32A5,5 0 1,0 59,42Z"/>
+    <!-- Beak -->
+    <path
+        android:fillColor="#F59E0B"
+        android:pathData="M48,44L44,52L52,52Z"/>
+</vector>

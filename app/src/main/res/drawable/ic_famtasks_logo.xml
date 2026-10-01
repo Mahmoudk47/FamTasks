@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="96dp"
+    android:height="96dp"
+    android:viewportWidth="96"
+    android:viewportHeight="96">
+    <!-- Modern Squircle Background -->
+    <path
+        android:fillColor="#4F46E5"
+        android:pathData="M 22,0 L 74,0 C 86.15,0 96,9.85 96,22 L 96,74 C 96,86.15 86.15,96 74,96 L 22,96 C 9.85,96 0,86.15 0,74 L 0,22 C 0,9.85 9.85,0 22,0 Z" />
+
+    <!-- FamTasks F-Checkmark Monogram: Vertical Stem -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="8"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M 30,24 L 30,72" />
+
+    <!-- Top Bar (Roof / List Item) -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="8"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M 30,24 L 68,24" />
+
+    <!-- Dynamic Checkmark (Accomplishment / Task Complete) -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="8"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M 30,48 L 45,63 L 74,34" />
+</vector>

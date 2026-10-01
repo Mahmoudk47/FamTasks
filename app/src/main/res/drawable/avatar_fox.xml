@@ -1,0 +1,45 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="96dp"
+    android:height="96dp"
+    android:viewportWidth="96"
+    android:viewportHeight="96">
+    <!-- Circle Background -->
+    <path
+        android:fillColor="#FFEDD5"
+        android:pathData="M48,4A44,44 0 1,0 48,92A44,44 0 1,0 48,4Z"/>
+    <!-- Fox Ears -->
+    <path
+        android:fillColor="#EA580C"
+        android:pathData="M24,20L38,44L18,44Z"/>
+    <path
+        android:fillColor="#EA580C"
+        android:pathData="M72,20L78,44L58,44Z"/>
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M26,26L34,42L22,42Z"/>
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M70,26L74,42L62,42Z"/>
+    <!-- Fox Head -->
+    <path
+        android:fillColor="#F97316"
+        android:pathData="M48,34C30,34 20,48 20,60L48,82L76,60C76,48 66,34 48,34Z"/>
+    <!-- White Cheeks -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M20,60L36,54L48,72L20,60Z"/>
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M76,60L60,54L48,72L76,60Z"/>
+    <!-- Nose -->
+    <path
+        android:fillColor="#1E293B"
+        android:pathData="M48,70A4,4 0 1,0 48,62A4,4 0 1,0 48,70Z"/>
+    <!-- Eyes -->
+    <path
+        android:fillColor="#1E293B"
+        android:pathData="M34,48A3,3 0 1,0 34,42A3,3 0 1,0 34,48Z"/>
+    <path
+        android:fillColor="#1E293B"
+        android:pathData="M62,48A3,3 0 1,0 62,42A3,3 0 1,0 62,48Z"/>
+</vector>
