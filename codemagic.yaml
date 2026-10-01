@@ -6,6 +6,7 @@ workflows:
       - name: Build Android APK
         script: |
           brew install gradle
+          gradle signingReport
           gradle assembleDebug
     artifacts:
       - app/build/outputs/apk/**/*.apk
